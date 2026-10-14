@@ -1,0 +1,81 @@
+Predicting customer churn
+
+Option A | Data Science Group Assignment
+
+Group members and student IDs: [Add all four members]<br/>Submission date: [Add date]
+
+Executive summary
+
+I would choose Option A because the question is clear: will a customer leave or stay? This project uses 7,043 customer records and compares logistic regression with a small decision tree. Logistic regression performed better overall. Its test accuracy was 80.2%, but it found only 52.9% of the customers who left. I would use it for a small customer support pilot, with human review, before considering wider use.
+
+1. Introduction
+
+Churn means a customer stops using a company’s service. A telecom provider can use churn predictions to decide which customers may need help. However, predicting who leaves does not tell us who can be persuaded to stay. The business must test whether contacting customers actually improves retention.
+
+I would use the Telco Customer Churn dataset suggested in the assignment (BlastChar, n.d.). The CSV was downloaded from IBM’s public repository (IBM, n.d.-a). IBM describes its Telco sample as fictional, so this should be treated as an educational example rather than verified current company data (IBM, n.d.-b).
+
+2. Data description and cleaning
+
+The dataset has 7,043 rows and 21 columns. Each row represents one customer. Important fields include tenure, contract type, monthly charges and services. Churn is the target: Yes becomes 1 and No becomes 0. Overall, 26.5% of customers left, while 73.5% stayed.
+
+There were no duplicate customer IDs. TotalCharges contained 11 blank values. These were converted to missing numerical values and filled with the training median inside the model pipeline. These customers all had zero tenure, so setting their total charges to zero would also be a reasonable alternative. The simple median rule was kept consistent across models.
+
+I would remove customerID because it identifies a customer without explaining their behaviour. Valid high bills and long tenures were kept. Categories such as “No internet service” were kept because they describe a real service situation, not a missing answer. The data was split into 5,634 training customers and 1,409 test customers, keeping similar churn proportions.
+
+3. Exploratory data analysis
+
+The charts below use only the training set. Figure 1 shows that churn was 42.7% for monthly contracts, 11.1% for one year contracts and 2.9% for two year contracts. Monthly customers can leave more easily, but people who already expect to stay may also choose longer contracts.
+
+Figure 1. Training churn rates by contract, internet service and senior status.
+
+Figure 2 compares tenure and monthly charges. Customers who left had an average tenure of 18.4 months, compared with 37.6 months for customers who stayed. Their average monthly charge was also higher: $74.86 compared with $61.34. I would therefore investigate early customer experiences and billing concerns.
+
+Figure 2. Training distributions for customers who stayed and left. Density compares distribution shapes rather than group sizes.
+
+These patterns do not prove that higher prices or short contracts cause churn. For example, higher charges may reflect different services. The dataset does not include enough information about service quality, competitors or customer complaints to explain every difference.
+
+4. Feature engineering
+
+I would add NewCustomer, equal to 1 when tenure is 12 months or less. This gives the model a simple way to represent the first year of the customer relationship. It overlaps with tenure, and this project does not separately test whether it improves performance. Numerical fields were scaled and categories were converted into separate indicator columns. All learned preprocessing was fitted within the training folds, avoiding information from the test set.
+
+5. Modelling approach
+
+I would compare logistic regression and a decision tree because both are straightforward to explain. Logistic regression combines customer characteristics to estimate churn probability. A decision tree makes a series of simple splits. The tree was limited to four levels with at least 30 customers per leaf to reduce memorisation. Both models used scikit-learn (Scikit-learn developers, n.d.).
+
+Five fold cross validation on the training set selected the model using F1. Logistic regression scored 0.593, compared with 0.539 for the tree. I would choose logistic regression on this basis, before examining test performance. Both models used a fixed probability cutoff of 0.50. No extensive parameter search was used.
+
+6. Results and discussion
+
+Accuracy measures all correct predictions. Precision measures how many flagged customers actually left. Recall measures how many actual churners were found. F1 balances precision and recall. Predicting that everyone stays already gives 73.5% accuracy, but finds no churners. This shows why accuracy alone is misleading.
+
+Logistic regression flagged 301 test customers. Of these, 198 left and 103 stayed. It missed 176 customers who left. Therefore, roughly two thirds of its alerts were correct, but it missed nearly half of all churners. This is useful for an initial pilot, but not enough to claim that the problem is solved.
+
+Figure 3. Logistic regression confusion matrix on 1,409 test customers.
+
+7. Recommendations and limitations
+
+I would begin with a small voluntary callback programme. Staff could ask about billing problems or service issues before offering a discount. If the model flags 500 customers but the company can contact only 100, I would rank by predicted risk and then review likely customer value and contact cost. A high risk customer is not necessarily someone who will respond to an offer.
+
+I would randomly compare contacted customers with a similar control group. The company should measure additional customers retained and profit after contact and discount costs. This dataset cannot tell us the expected savings because it does not include intervention outcomes or profit margins. Any claimed savings would be an assumption.
+
+The fairness check found that 39.2% of senior customers were flagged, compared with 18.0% of other customers. Among customers who stayed, the false positive rate was 21.8% for seniors and 8.3% for others. These differences need review. They do not prove discrimination, but the model should not be used to punish customers or automatically change their prices.
+
+The senior test group contains only 222 customers, so its estimates are less stable. Removing SeniorCitizen alone would not guarantee fairness because other fields may carry similar information. A fuller review should also examine other groups and whether the proposed support helps them equally.
+
+The model is not ready for production. This is sample data, the test split is random rather than a future time period, and the timing of the inputs relative to churn is not established. A real deployment needs recent company data collected before the prediction date, a clear future churn window, privacy controls and ongoing monitoring.
+
+Conclusion
+
+I would choose logistic regression because it gave the stronger F1 result and remains simple to explain. The clearest finding is that monthly contracts and shorter tenure are associated with churn. The practical next step is a small support pilot, followed by a check of actual retention, costs and fairness.
+
+References
+
+BlastChar. (n.d.). Telco customer churn [Data set]. Kaggle. <link href="https://www.kaggle.com/datasets/blastchar/telco-customer-churn" color="#174b61">Source</link>.
+
+IBM. (n.d.-a). Telco customer churn on ICP4D [Data and code repository]. GitHub. <link href="https://github.com/IBM/telco-customer-churn-on-icp4d" color="#174b61">Source</link>.
+
+IBM. (n.d.-b). Telco customer churn. IBM Documentation. <link href="https://www.ibm.com/docs/en/cognos-analytics/12.0.x?topic=samples-telco-customer-churn" color="#174b61">Source</link>.
+
+Scikit-learn developers. (n.d.). User guide. <link href="https://scikit-learn.org/stable/user_guide.html" color="#174b61">Source</link>.
+
+Accessed 14 October 2026. Software: Python, pandas, NumPy, Matplotlib, scikit-learn and joblib. Version details and project links are in README.md. OpenAI ChatGPT assisted with code and writing; the group must review and disclose this assistance under course rules.

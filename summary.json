@@ -1,0 +1,72 @@
+{
+  "best_name": "Logistic regression",
+  "cv_scores": {
+    "Logistic regression": 0.5926439909349435,
+    "Decision tree": 0.5392031578703785
+  },
+  "risk": 0.04605277033439521,
+  "cm": [
+    [
+      932,
+      103
+    ],
+    [
+      176,
+      198
+    ]
+  ],
+  "results": [
+    {
+      "Model": "Logistic regression",
+      "Accuracy": 0.8019872249822569,
+      "Precision": 0.6578073089700996,
+      "Recall": 0.5294117647058824,
+      "F1": 0.5866666666666667
+    },
+    {
+      "Model": "Decision tree",
+      "Accuracy": 0.7920511000709723,
+      "Precision": 0.6575875486381323,
+      "Recall": 0.45187165775401067,
+      "F1": 0.5356576862123613
+    },
+    {
+      "Model": "Always stay",
+      "Accuracy": 0.7345635202271115,
+      "Precision": 0.0,
+      "Recall": 0.0,
+      "F1": 0.0
+    }
+  ],
+  "fairness": [
+    {
+      "SeniorCitizen": 0,
+      "N": 1187,
+      "Flag rate": 0.18,
+      "Recall": 0.5,
+      "False positive rate": 0.083
+    },
+    {
+      "SeniorCitizen": 1,
+      "N": 222,
+      "Flag rate": 0.392,
+      "Recall": 0.612,
+      "False positive rate": 0.218
+    }
+  ],
+  "contracts": {
+    "Month-to-month": 0.4274661508704062,
+    "One year": 0.11082693947144075,
+    "Two year": 0.02869757174392936
+  },
+  "averages": {
+    "tenure": {
+      "0": 37.58758154143513,
+      "1": 18.358528428093646
+    },
+    "MonthlyCharges": {
+      "0": 61.34318676008698,
+      "1": 74.86016722408027
+    }
+  }
+}
