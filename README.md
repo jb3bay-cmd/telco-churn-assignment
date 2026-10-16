@@ -12,9 +12,9 @@ Sign in to Google if asked. Choose **Runtime → Run all**, then wait for the co
 
 1. **Charts:** scroll to section 2 and explain the patterns.
 2. **Results:** scroll to section 4 and compare the two models.
-3. **Working model:** scroll to section 5 and press **▶** beside its code cell. It displays one customer's predicted chance of leaving and their actual outcome.
+3. **Working model:** scroll to section 5, choose **Customer A, B or C** from the dropdown, and click **Predict**. Try another customer to see a different prediction and actual outcome.
 
-The notebook includes short sentences you can say during the presentation. Run all once before recording, then rerun section 5 during the demo.
+The notebook includes short sentences you can say during the presentation. Run all once before recording, then use the customer dropdown and Predict button during the demo. If the dropdown is missing, press ▶ beside section 5's code once.
 
 ## What are the two files?
 
