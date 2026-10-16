@@ -1,24 +1,12 @@
-# Start here
+# Telecom customer churn
 
-This project predicts whether a telecom customer will leave.
+Comparison of logistic regression and a decision tree using 7,043 telecom customer records.
 
-## 1. Open the notebook
+[Open notebook in Google Colab](https://colab.research.google.com/github/jb3bay-cmd/telco-churn-assignment/blob/main/01_Notebook.ipynb)
 
-### [Click here to open and run the demonstration](https://colab.research.google.com/github/jb3bay-cmd/telco-churn-assignment/blob/main/01_Notebook.ipynb)
+- **01_Notebook.ipynb:** data preparation, charts, model evaluation and interactive customer predictions.
+- **02_Model.joblib:** saved logistic regression pipeline, including preprocessing.
 
-Sign in to Google if asked. Choose **Runtime → Run all**, then wait for the code to finish. No installation on your computer is needed.
+Logistic regression test results: **80.2% accuracy · 65.8% precision · 52.9% recall · 58.7% F1**.
 
-## 2. Present in this order
-
-1. **Charts:** scroll to section 2 and explain the patterns.
-2. **Results:** scroll to section 4 and compare the two models.
-3. **Working model:** scroll to section 5, choose **Customer A, B or C** from the dropdown, and click **Predict**. Try another customer to see a different prediction and actual outcome.
-
-The notebook includes short sentences you can say during the presentation. Run all once before recording, then use the customer dropdown and Predict button during the demo. If the dropdown is missing, press ▶ beside section 5's code once.
-
-## What are the two files?
-
-- **01_Notebook.ipynb:** the analysis, charts, results and prediction demo, in order.
-- **02_Model.joblib:** the saved trained model. The notebook opens it automatically. You do not need to open it yourself.
-
-The dataset is downloaded automatically. Your report and ethics form are submitted separately. Record a 5 to 7 minute video or present live, as required by your assignment.
+Dataset: [IBM Telco Customer Churn](https://github.com/IBM/telco-customer-churn-on-icp4d), fictional sample data. Predictions illustrate churn risk and do not establish causation.
